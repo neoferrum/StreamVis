@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Field.h"
 #include <iostream>
+#include <cmath>
 
 
 Field::Field(void)

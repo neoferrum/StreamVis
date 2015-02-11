@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Segment.h"
 #include <iostream>
+#include <cmath>
+#include <float.h>
 
 Segment::Segment(void)
 {
