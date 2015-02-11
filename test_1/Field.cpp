@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Field.h"
 #include <iostream>
-#include <cmath>
 
 
 Field::Field(void)
@@ -21,12 +20,17 @@ void CalculateV(int i, int countSeg, int countCells, double v1, double v2, doubl
 {
 	double a, b;
 	FunctionV(v1, v2, 0, countSeg*(countCells-1), &a, &b);
-	if (i==0)
+	if ((i == 0) & (i == (countSeg - 1)) )
+	{
+		*segV1 = v1;
+		*segV2 = v2;
+	}
+	else if ((i == 0) & (i != (countSeg - 1)) )
 	{
 		*segV1 = v1;
 		*segV2 = a*(countCells-1) + b;
 	}
-	if (i== countSeg - 1)
+	else if ((i== countSeg - 1) & (i != 0) )
 	{
 		*segV2 = v2;
 		*segV1 = a*(countSeg*(countCells-1) - countCells) + b;
@@ -37,6 +41,25 @@ void CalculateV(int i, int countSeg, int countCells, double v1, double v2, doubl
 		*segV2 = a*(i*(countCells-1) + (countCells - 1)) + b;
 	}
 }
+
+void Field::CalculateS(int l, int m, int countSegX, int countSegY)
+{
+	Point p = Field::segments[l][m].CalculateMove();
+	time += segments[l][m].time;
+	S.x += p.x;
+	S.y += p.y;
+
+	Field::FindSegment(S, countSegX, countSegY);
+	l = Field::currentSeg[0];
+	m = Field::currentSeg[1];
+	std::cout << "newSeg = " << l << ", " << m << "\n";
+	segments[l][m].p0 = S; 
+	std::cout << "newP0 = " << segments[l][m].p0.x << ", " << segments[l][m].p0.y<< "\n";
+	std::cout << "\n";
+
+
+}
+
 
 Field::Field(int countSegX, int countSegY, int countCellsX, int countCellsY, double vx1, double vx2, double vy1, double vy2, Point _p0)
 {
@@ -71,36 +94,12 @@ Field::Field(int countSegX, int countSegY, int countCellsX, int countCellsY, dou
 				time = 0;
 				S.x = p0.x;
 				S.y = p0.y;
-				//for (l; l < countSegX; l ++)
-				//	for (m; m < countSegY; m ++)
-				//	{
-				//		segments[l][m].time = segments[l][m].GetTime();
-				//		std::cout << "time [" << l << ", " << m << "] = " << segments[l][m].time << "\n";
-				//		Point p = segments[l][m].GetCoord(segments[l][m].time);
-				//		std::cout << "coord = " << p.x << ", " << p.y << "\n";
-				//		time += segments[l][m].time;
-				//		sx += p.x;
-				//		sy += p.y;
-				//	}
+				CalculateS(l, m, countSegX, countSegY);
 
-
-				while ((S.x < segments[countSegX-1][0].points[countCellsX - 1][0].x) & (S.y < segments[0][countSegY-1].points[0][countCellsY-1].y))
+				while ((S.x < segments[countSegX-1][0].points[countCellsX - 1][0].x) & (S.y < segments[0][countSegY-1].points[0][countCellsY-1].y)
+					& (S.x > segments[0][0].points[0][0].x) & (S.y > segments[0][0].points[0][0].y) )
 				{
-					std::cout << segments[l][m].vx1 <<", " << segments[l][m].vx2 <<", " << segments[l][m].vy1 <<", " << segments[l][m].vy2 << "\n" ;
-					segments[l][m].time = segments[l][m].GetTime();
-					std::cout << "MoveTime [" << l << ", " << m << "] = " << segments[l][m].time << "\n";
-					Point p = segments[l][m].GetCoord(segments[l][m].time);
-					std::cout << "MoveCoord = " << p.x << ", " << p.y << "\n"; 
-					time += segments[l][m].time;					
-					S.x += p.x;
-					S.y += p.y;
-					Field::FindSegment(S, countSegX, countSegY);
-					l = Field::currentSeg[0];
-					m = Field::currentSeg[1];
-					std::cout << "newSeg = " << l << ", " << m << "\n";
-					segments[l][m].p0 = S; 
-					std::cout << "newP0 = " << segments[l][m].p0.x << ", " << segments[l][m].p0.y<< "\n";
-					std::cout << "\n";
+					CalculateS(l, m, countSegX, countSegY);
 				}
 
 					std::cout << "Time = " << time << "\n";
@@ -118,7 +117,7 @@ void Field::FindSegment(Point p, int segCountX, int segCountY)
 			{
 				currentSeg[0] = i;
                 currentSeg[1] = j;
-               // break;
+               // break; останавливается на первом найденном
 			}
 		}
 }

@@ -8,13 +8,12 @@
 #include "Field.h"
 #include <stdio.h>
 #include "iostream"
-#include <math.h>
 
 void CheckCount(double count, double *var)
 {
 		while (count <= 0 || (count != floor(count)))
 		{
-			std::cout << "Type the number >0 and integer" << "\n";
+			std::cout << "Type the number > 0 and integer" << "\n";
 			std::cin >> count;
 		}
 		*var = count;
@@ -30,7 +29,7 @@ void CheckPoint(double coord, double countSeg, double countCells, double *var)
 	*var = coord;
 }
 
-int main(int argc, char* argv[])
+int _tmain(int argc, _TCHAR* argv[])
 {
 	double SegCountX, SegCountY, CellsCountX, CellsCountY;
 	double vx1, vx2, vy1, vy2;

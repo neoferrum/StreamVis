@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "Segment.h"
 #include <iostream>
-#include <cmath>
-#include <float.h>
+#include "Field.h"
 
 Segment::Segment(void)
 {
@@ -29,7 +28,15 @@ Segment::Segment(int _countX, int _countY, double _vx1, double _vx2, double _vy1
 	FunctionV(vy1, vy2, points[0][0].y, points[0][countY-1].y, &ay, &by); 
 }
 
-
+Point Segment::CalculateMove()
+{
+	std::cout << vx1 <<", " << vx2 <<", " << vy1 <<", " << vy2 << "\n" ;
+	time = GetTime();
+	std::cout << "MoveTime = " << time << "\n";
+	Point p = GetCoord(time);
+	std::cout << "MoveCoord = " << p.x << ", " << p.y << "\n"; 
+	return p;
+}
 
 
 void Segment::FunctionV(double v1, double v2, double coord1, double coord2, double *a, double *b)
@@ -116,27 +123,25 @@ double  Segment::GetCoord(double time, double v1, double v2, double coord1, doub
 
   if (fabs(v1 - v2) < eps)
 		return time*v1;
-  else
-  {
-
-	if (((v1 > 0) & (v2 > 0)) || ((v1 == 0) & (v2 > 0)) || ((v1 > 0) & (v2 == 0)))
-		FunctionV(v1, v2, coord0, coord2, &a, &b);		
-		
-	if (((v1 < 0) & (v2 < 0)) || ((v1 == 0) & (v2 < 0)) && ((v1 < 0) && (v2 == 0)))
-		FunctionV(v1, v2, coord0, coord1, &a, &b);
-
-	if ((v1 < 0) & (v2 > 0))
-	{
-		FunctionV(v1, v2, coord1, coord2, &a, &b);
-		double v0 = (a) *coord0 + b;
-		if (v0 < 0) 
-			FunctionV(v1, v2, coord0, coord1, &a, &b);
-		else 
-			FunctionV(v1, v2, coord0, coord2, &a, &b);
-	}
-		return 1/(a) * fabs(exp(a*time));
-  }
+  else 
+	  {
+		  if (((v1 > 0) & (v2 > 0)) || ((v1 == 0) & (v2 > 0)) || ((v1 > 0) & (v2 == 0)))
+			  FunctionV(v1, v2, coord0, coord2, &a, &b);		
+		  else if (((v1 < 0) & (v2 < 0)) || ((v1 == 0) & (v2 < 0)) || ((v1 < 0) && (v2 == 0)))
+			  FunctionV(v1, v2, coord0, coord1, &a, &b);
+		  else if ((v1 < 0) & (v2 > 0))
+		  {
+				FunctionV(v1, v2, coord1, coord2, &a, &b);
+				double v0 = (a) *coord0 + b;
+				if (v0 < 0) 
+					FunctionV(v1, v2, coord0, coord1, &a, &b);
+				else 
+					FunctionV(v1, v2, coord0, coord2, &a, &b);
+		  }
+			return 1/(a) * fabs(exp(a*time));
+		}
 }
+
 double  Segment::GetCoord(double time, double a, double v1) 
 {
 

@@ -13,6 +13,7 @@ public:
 	Point S;
 
 	void FindSegment(Point p, int segCountX, int segCountY);
+	void CalculateS(int l, int m, int countSegX, int countSegY);
 	Field(void);
 	Field(int, int, int, int, double, double, double, double, Point);
 	//Field(Point p0);

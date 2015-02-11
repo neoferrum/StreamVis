@@ -18,6 +18,7 @@ public:
 	Segment(void);
 	Segment(int countX, int countY, double _vx1, double _vx2, double _vy1, double _vy2, int k, int p);
 	void FunctionV(double, double, double, double, double *, double *);
+	Point CalculateMove();
 
 	double GetTime(double v1, double v2, double coord1, double coord2, double coord0, double a, double b);
 	double GetTime();
