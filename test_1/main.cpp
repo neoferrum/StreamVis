@@ -8,6 +8,7 @@
 #include "Field.h"
 #include <stdio.h>
 #include "iostream"
+#include "math.h"
 
 void CheckCount(double count, double *var)
 {
@@ -29,7 +30,7 @@ void CheckPoint(double coord, double countSeg, double countCells, double *var)
 	*var = coord;
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	double SegCountX, SegCountY, CellsCountX, CellsCountY;
 	double vx1, vx2, vy1, vy2;
