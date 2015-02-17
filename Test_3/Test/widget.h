@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "field.h"
 
 namespace Ui {
 class Widget;
@@ -14,14 +15,17 @@ class Widget : public QWidget
 
 public:
     explicit Widget(QWidget *parent = 0);
-    void Generate(Ui::Widget *ui);
     ~Widget();
 
 private slots:
     void on_pushButtonCalculate_clicked();
 
 private:
+    Field field;
     Ui::Widget *ui;
+
+    void Generate(Ui::Widget *ui);
+    void Calculate();
 };
 
 #endif // WIDGET_H

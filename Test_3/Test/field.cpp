@@ -11,7 +11,6 @@ Field::Field(void)
 
 void Field::CalculateV()
 {
-   double ax, bx, ay, by;
    Functions::FunctionV(0, nx*dx, vx1, vx2, &ax, &bx);
    Functions::FunctionV(0, ny*dy, vy1, vy2, &ay, &by);
 
@@ -25,6 +24,17 @@ void Field::CalculateV()
    for (int j = 0; j < (ny + 1); j++)
            Functions::CalculateVforCell(j, ny, dy, vy1, vy2, ay, by, &vy[j]);
    //--------------------------------
+}
+
+void Field::GetTime()
+{
+    double tx = Functions::GetTime(vx1, vx2, 0, nx*dx, x0, ax, bx);
+    double ty = 0; //Functions::GetTime(vy1, vy2, 0, ny*dy, y0, ay, by);
+
+    if (((tx <= ty) & (tx > eps)) || (ty < eps))
+        time = tx;
+    else
+        time = ty;
 }
 
 //void Field::CalculateS(int l, int m, int countSegX, int countSegY)

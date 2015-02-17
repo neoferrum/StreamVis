@@ -3,8 +3,6 @@
 class Field
 {
 public:
-    //Cells **cells;
-
     int nx, ny;
     double dx, dy;
     double x0, y0;
@@ -16,20 +14,17 @@ public:
     double time;            // общее время движения
     double X, Y;            // конечные координаты
 
+    double ax, bx, ay, by;
+
     Field(void);
-    //Field(int nx, int ny);
+    ~Field(void);
+
+
+
     void CalculateV();
+    void GetTime();
 
-        //int currentSeg[2];// сегмент в котором cейчас точка - х, у
-        //Point p0;
-        //Point S;
 
-        //void FindSegment(Point p, int segCountX, int segCountY);
-        //void CalculateS(int l, int m, int countSegX, int countSegY);
 
-        //Field(int, int, int, int, double, double, double, double, Point);
-	//Field(Point p0);
-
-	~Field(void);
 };
 

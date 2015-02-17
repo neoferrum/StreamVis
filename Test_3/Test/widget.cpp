@@ -7,7 +7,7 @@
 
 void Widget::Generate(Ui::Widget *ui)
 {
-    Field field = Field ();
+    field = Field ();
 
     field.x0 = ui->doubleSpinBox_x0->value();
     field.y0 = ui->doubleSpinBox_y0->value();
@@ -31,9 +31,12 @@ void Widget::Generate(Ui::Widget *ui)
 
 }
 
-void Calculate()
+void Widget::Calculate()
 {
-
+    field.GetTime();
+    QString str;
+    QString time = "time = " + str.setNum(field.time);
+    ui->textBrowser->append(time);
 }
 
 Widget::Widget(QWidget *parent) :
