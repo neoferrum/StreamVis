@@ -1,22 +1,23 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-02-17T15:00:09
+# Project created by QtCreator 2015-02-17T17:07:18
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT       += opengl
-
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Test_OpenGL
+TARGET = OpenGL
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+    scenegl.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    scenegl.h
 
-FORMS    += mainwindow.ui
+LIBS += -L/usr/local/lib -lGLU
+
+

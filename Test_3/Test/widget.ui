@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>466</width>
-    <height>431</height>
+    <width>829</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -167,8 +167,11 @@
        <italic>false</italic>
       </font>
      </property>
+     <property name="maximum">
+      <double>300.000000000000000</double>
+     </property>
      <property name="value">
-      <double>0.000000000000000</double>
+      <double>45.000000000000000</double>
      </property>
     </widget>
     <widget class="QDoubleSpinBox" name="doubleSpinBox_y0">
@@ -185,8 +188,11 @@
        <italic>false</italic>
       </font>
      </property>
+     <property name="maximum">
+      <double>300.000000000000000</double>
+     </property>
      <property name="value">
-      <double>0.000000000000000</double>
+      <double>5.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_11">
@@ -267,7 +273,7 @@
       </font>
      </property>
      <property name="value">
-      <double>1.000000000000000</double>
+      <double>20.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -327,7 +333,7 @@
       </font>
      </property>
      <property name="value">
-      <double>1.000000000000000</double>
+      <double>20.000000000000000</double>
      </property>
     </widget>
    </widget>
@@ -512,10 +518,10 @@
   <widget class="QPushButton" name="pushButtonCalculate">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>340</x>
      <y>220</y>
-     <width>101</width>
-     <height>31</height>
+     <width>111</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
@@ -525,12 +531,33 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>25</x>
      <y>220</y>
-     <width>256</width>
-     <height>192</height>
+     <width>301</width>
+     <height>131</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>50</y>
+     <width>301</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+   </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

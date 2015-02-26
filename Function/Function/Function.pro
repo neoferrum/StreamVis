@@ -1,27 +1,25 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-02-22T02:48:41
+# Project created by QtCreator 2015-02-26T14:21:15
 #
 #-------------------------------------------------
 
 QT       += core gui opengl
 
+LIBS += -L/usr/local/lib -lGLU
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Test
+TARGET = Function
 TEMPLATE = app
 
-LIBS += -L/usr/local/lib -lGLU
 
 SOURCES += main.cpp\
         widget.cpp \
-    draw.cpp \
-    field.cpp \
-    functions.cpp
+    drawwidget.cpp
 
 HEADERS  += widget.h \
-    draw.h \
-    field.h \
-    functions.h
+    drawwidget.h
 
 FORMS    += widget.ui

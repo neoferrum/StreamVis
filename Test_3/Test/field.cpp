@@ -1,16 +1,11 @@
-//#include "stdafx.h"
 #include "field.h"
-#include "functions.h"
-#include <iostream>
-#include "cmath"
 
 
-Field::Field(void)
-{   
-}
+Field::Field(void) {}
 
-void Field::CalculateV()
+void Field::FillArrV()
 {
+   double ax, bx, ay, by;
    Functions::FunctionV(0, nx*dx, vx1, vx2, &ax, &bx);
    Functions::FunctionV(0, ny*dy, vy1, vy2, &ay, &by);
 
@@ -18,7 +13,7 @@ void Field::CalculateV()
    vx = new double[nx + 1];
    vy = new double[ny + 1];
 
-   // заполнение массивов
+   // заполнение массивов скоростей
    for (int i = 0; i < (nx + 1); i++)
            Functions::CalculateVforCell(i, nx, dx, vx1, vx2, ax, bx, &vx[i]);
    for (int j = 0; j < (ny + 1); j++)
@@ -26,16 +21,41 @@ void Field::CalculateV()
    //--------------------------------
 }
 
-void Field::GetTime()
+void Field::FillArrCoord()
 {
-    double tx = Functions::GetTime(vx1, vx2, 0, nx*dx, x0, ax, bx);
-    double ty = 0; //Functions::GetTime(vy1, vy2, 0, ny*dy, y0, ay, by);
-
-    if (((tx <= ty) & (tx > eps)) || (ty < eps))
-        time = tx;
-    else
-        time = ty;
+    x = new double[nx + 1];
+    y = new double[ny + 1];
+   for (int i = 0; i <= nx; i ++)
+       x[i] = dx*i;
+   for (int j = 0; j <= ny; j ++)
+       y[j] = dy*j;
 }
+
+void Field::CalculateNewP0(double startX, double startY, double *moveX, double *moveY, double *t)
+{
+    int i = Functions::FindStartCell(x, nx, startX);
+    int j = Functions::FindStartCell(y, ny, startY);
+
+    double ax = 0, bx = 0, ay = 0, by =0;
+
+    Functions::FunctionV(x[i], x[i + 1], vx[i], vx[i + 1], &ax, &bx);
+    //Functions::FunctionV(40, 60, 7, 10, &ax, &bx);
+    Functions::FunctionV(y[j], y[j + 1], vy[j], vy[j + 1], &ay, &by);
+
+    double tx = Functions::GetTime(vx[i], vx[i + 1], x[i], x[i + 1], startX, ax, bx);
+    double ty = Functions::GetTime(vy[i], vy[i+1], y[i], y[i+1], startY, ay, by);
+    if (((tx <= ty) & (tx > eps)) || (ty < eps))
+        *t = tx;
+    else
+        *t = ty;
+
+    // расстояние от точки р0 до точки выхода
+    *moveX = startX + Functions::GetCoord(*t, vx[i], vx[i + 1], x[i], x[i + 1], startX);
+    *moveY = startY + Functions::GetCoord(*t, vy[j], vy[j+1], y[j], y[j+1], startY);
+}
+
+
+
 
 //void Field::CalculateS(int l, int m, int countSegX, int countSegY)
 //{
@@ -101,21 +121,7 @@ void Field::GetTime()
 //					std::cout << "Coord = " << S.x << ", " << S.y;
 //}
 
-//void Field::FindSegment(Point p, int segCountX, int segCountY)
-//{
-//	bool find;
-//	for (int i = 0; i < segCountX; i ++)
-//		for (int j = 0; j < segCountY; j++)
-//		{
-//			find = segments[i][j].CheckConsist(p);
-//			if (find)
-//			{
-//				currentSeg[0] = i;
-//                currentSeg[1] = j;
-//               // break; останавливается на первом найденном
-//			}
-//		}
-//}
+
 
 
 Field::~Field(void)

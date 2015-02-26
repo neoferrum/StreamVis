@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -54,12 +55,14 @@ public:
     QDoubleSpinBox *doubleSpinBox_vy2;
     QPushButton *pushButtonCalculate;
     QTextBrowser *textBrowser;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(466, 431);
+        Widget->resize(829, 374);
         groupBoxInput = new QGroupBox(Widget);
         groupBoxInput->setObjectName(QStringLiteral("groupBoxInput"));
         groupBoxInput->setGeometry(QRect(20, 10, 431, 211));
@@ -112,12 +115,14 @@ public:
         doubleSpinBox_x0->setObjectName(QStringLiteral("doubleSpinBox_x0"));
         doubleSpinBox_x0->setGeometry(QRect(50, 37, 71, 22));
         doubleSpinBox_x0->setFont(font3);
-        doubleSpinBox_x0->setValue(0);
+        doubleSpinBox_x0->setMaximum(300);
+        doubleSpinBox_x0->setValue(45);
         doubleSpinBox_y0 = new QDoubleSpinBox(groupBox_Coords);
         doubleSpinBox_y0->setObjectName(QStringLiteral("doubleSpinBox_y0"));
         doubleSpinBox_y0->setGeometry(QRect(170, 37, 71, 22));
         doubleSpinBox_y0->setFont(font3);
-        doubleSpinBox_y0->setValue(0);
+        doubleSpinBox_y0->setMaximum(300);
+        doubleSpinBox_y0->setValue(5);
         label_11 = new QLabel(groupBox_Coords);
         label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setGeometry(QRect(25, 37, 41, 21));
@@ -134,7 +139,7 @@ public:
         doubleSpinBox_dx->setObjectName(QStringLiteral("doubleSpinBox_dx"));
         doubleSpinBox_dx->setGeometry(QRect(100, 30, 71, 22));
         doubleSpinBox_dx->setFont(font3);
-        doubleSpinBox_dx->setValue(1);
+        doubleSpinBox_dx->setValue(20);
         label_5 = new QLabel(groupBoxCells);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(10, 30, 61, 21));
@@ -147,7 +152,7 @@ public:
         doubleSpinBox_dy->setObjectName(QStringLiteral("doubleSpinBox_dy"));
         doubleSpinBox_dy->setGeometry(QRect(100, 55, 71, 22));
         doubleSpinBox_dy->setFont(font3);
-        doubleSpinBox_dy->setValue(1);
+        doubleSpinBox_dy->setValue(20);
         groupBox_V = new QGroupBox(groupBoxInput);
         groupBox_V->setObjectName(QStringLiteral("groupBox_V"));
         groupBox_V->setGeometry(QRect(190, 120, 241, 80));
@@ -190,10 +195,18 @@ public:
         doubleSpinBox_vy2->setValue(0);
         pushButtonCalculate = new QPushButton(Widget);
         pushButtonCalculate->setObjectName(QStringLiteral("pushButtonCalculate"));
-        pushButtonCalculate->setGeometry(QRect(350, 220, 101, 31));
+        pushButtonCalculate->setGeometry(QRect(340, 220, 111, 41));
         textBrowser = new QTextBrowser(Widget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(40, 220, 256, 192));
+        textBrowser->setGeometry(QRect(25, 220, 301, 131));
+        verticalLayoutWidget = new QWidget(Widget);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(500, 50, 301, 301));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
 
         retranslateUi(Widget);
 
