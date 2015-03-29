@@ -24,7 +24,6 @@ public:
     GlWidget();
     QVector<QVector3D> positionData;
     QVector<QVector3D> colorData;
-    void initScene();
     void initializeGL();
     void paintGL();
     void resizeGL(int, int);

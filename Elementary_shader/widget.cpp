@@ -10,6 +10,7 @@ Widget::Widget(QWidget *parent) :
     ui->verticalLayout->addWidget(glw);
 
     glw->updateGL();
+    setLayout(ui->verticalLayout);
 }
 
 
