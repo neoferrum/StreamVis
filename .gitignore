@@ -6,7 +6,8 @@
 *.exe
 *.o
 *.so
- 
+*-Debug
+*-Release
 # Qt user files #
 #################
 .pro.user
