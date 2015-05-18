@@ -17,11 +17,10 @@ public:
     ~Widget();
     
 private slots:
-    void on_spinBoxNx_valueChanged(int arg1);
-
-    void on_spinBoxNy_valueChanged(int arg1);
-
-    void on_doubleSpinBoxDx_valueChanged(double arg1);
+    void onNxChanged(int value);
+    void onNyChanged(int value);
+    void onDxChanged(double value);
+    void onDyChanged(double value);
 
 private:
     Ui::Widget *ui;

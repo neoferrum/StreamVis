@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -22,6 +23,10 @@ Widget::Widget(QWidget *parent) :
 
 //    QString str;
 //    ui->textBrowser->append(str.setNum(widget->WidgetW));
+    connect(ui->sbNx, SIGNAL(valueChanged(int)), this, SLOT(onNxChanged(int)));
+    connect(ui->sbNy, SIGNAL(valueChanged(int)), this, SLOT(onNyChanged(int)));
+    connect(ui->dsbDx, SIGNAL(valueChanged(double)), this, SLOT(onDxChanged(double)));
+    connect(ui->dsbDy, SIGNAL(valueChanged(double)), this, SLOT(onDyChanged(double)));
 
 }
 
@@ -30,20 +35,38 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::on_spinBoxNx_valueChanged(int arg1)
+void Widget::onNxChanged(int value)
 {
-    widget->nx = arg1;
+    qDebug() << "nx changed";
+    widget->nx = value;
     widget->initializeGL();
     widget->paintGL();
     widget->updateGL();
 }
 
-void Widget::on_spinBoxNy_valueChanged(int arg1)
+void Widget::onNyChanged(int value)
 {
-
+    qDebug() << "ny changed";
+    widget->ny = value;
+    widget->initializeGL();
+    widget->paintGL();
+    widget->updateGL();
 }
 
-void Widget::on_doubleSpinBoxDx_valueChanged(double arg1)
+void Widget::onDxChanged(double value)
 {
+    qDebug() << "dx changed";
+    widget->dx = value;
+    widget->initializeGL();
+    widget->paintGL();
+    widget->updateGL();
+}
 
+void Widget::onDyChanged(double value)
+{
+    qDebug() << "dy changed";
+    widget->dy = value;
+    widget->initializeGL();
+    widget->paintGL();
+    widget->updateGL();
 }
