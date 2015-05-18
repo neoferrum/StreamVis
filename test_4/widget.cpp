@@ -8,14 +8,14 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     widget = new GLWidget();
 
-    widget->nx = ui->spinBoxNx->value();
-    widget->ny = ui->spinBoxNy->value();
-    widget->dx = ui->doubleSpinBoxDx->value();
-    widget->dy = ui->doubleSpinBoxDy->value();
+    widget->nx = ui->sbNx->value();
+    widget->ny = ui->sbNy->value();
+    widget->dx = ui->dsbDx->value();
+    widget->dy = ui->dsbDy->value();
     widget->scale = 1;
     widget->line = false;
 
-    ui->verticalLayout->addWidget(widget);
+    ui->renderCanvas->addWidget(widget);
 
 //    widget->WidgetH = widget->height();
 //    widget->WidgetW = widget->width();
